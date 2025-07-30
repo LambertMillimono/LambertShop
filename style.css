@@ -4,6 +4,9 @@
   flex-direction: row !important;
   align-items: center !important;
   justify-content: flex-start !important;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
 }
 .main-nav {
   background: transparent !important;
@@ -17,12 +20,17 @@
   flex-direction: row;
   align-items: center;
   gap: 16px;
-  padding: 0 0 0 0;
+  padding: 0;
   margin: 0;
+  flex-wrap: wrap;
 }
 .search-bar {
-  margin-left: 110px !important; /* Augmente l'espace entre le menu et la barre de recherche */
+  margin-left: 9vw !important; /* Utilise une marge relative à la largeur */
   margin-right: 0 !important;
+  min-width: 180px;
+  width: 100%;
+  max-width: 320px;
+  flex: 1 1 180px;
 }
 
 /* Badge promo pour produits en promo sur l'accueil uniquement */
@@ -109,7 +117,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .header {
     flex-direction: column;
     align-items: stretch;
@@ -168,7 +176,11 @@
     margin-bottom: 2px;
   }
   .search-bar {
-    display: none;
+    display: block;
+    width: 100%;
+    min-width: 120px;
+    margin: 8px 0 0 0 !important;
+    max-width: 100vw;
   }
   .slider {
     height: 120px;

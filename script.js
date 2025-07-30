@@ -33,42 +33,7 @@ showSlide(slideIndex);
 "use strict";
 
 
-// Navigation dynamique
-const navLinks = document.querySelectorAll(".main-nav a");
-const views = document.querySelectorAll(".view");
 
-navLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    const targetView = link.getAttribute("data-view");
-
-    views.forEach(view => {
-      if (view.id === targetView) {
-        view.classList.add("active");
-      } else {
-        view.classList.remove("active");
-      }
-    });
-  });
-});
-
-
-navLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    // Afficher la bonne vue
-    const targetView = link.getAttribute("data-view");
-    views.forEach(view => {
-      view.classList.toggle("active", view.id === targetView);
-    });
-
-    // Mettre en surbrillance le lien actif
-    navLinks.forEach(l => l.classList.remove("active"));
-    link.classList.add("active");
-  });
-});
 
 
 "use strict";
@@ -343,6 +308,15 @@ liens.forEach(lien => {
     e.preventDefault();
     const cible = lien.getAttribute("data-view");
     afficherVue(cible);
+    // Si Accueil, Catégories, Produits ou Panier, scroll vers le haut du main
+    if (["accueil", "categories", "produits", "panier"].includes(cible)) {
+      const main = document.querySelector('main');
+      if (main) {
+        main.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
   });
 });
 
