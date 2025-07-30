@@ -1,44 +1,7 @@
-// Slider accueil
-let slideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-
-function showSlide(n) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle('active', i === n);
-  });
-}
-
-function nextSlide() {
-  slideIndex = (slideIndex + 1) % slides.length;
-  showSlide(slideIndex);
-}
-
-function prevSlide() {
-  slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-  showSlide(slideIndex);
-}
-
-if (prevBtn && nextBtn) {
-  prevBtn.addEventListener('click', prevSlide);
-  nextBtn.addEventListener('click', nextSlide);
-}
-
-// Auto défilement
-setInterval(nextSlide, 5000);
-showSlide(slideIndex);
-
-
 "use strict";
 
-
-
-
-
-"use strict";
-
-// Données produits (catégorisées)
+// === DONNÉES PRODUITS ===
+// Tableau contenant tous les produits de la boutique
 const produits = [
   // Electronique
   { nom: "Ordinateur de bureau", prix: 3500000, image: "images/bureautique.jpg", categorie: "Electronique" },
@@ -67,15 +30,20 @@ const produits = [
   { nom: "Désodorisant", prix: 20000, image: "images/Désodorisant .jpg", categorie: "Parfum" },
 ];
 
-// DOM
-const produitsGrid = document.getElementById("produits-grid");
-const panierContenu = document.getElementById("panier-contenu");
-const totalPrixElement = document.getElementById("total-prix");
-const cartCount = document.getElementById("cart-count");
 
+// === SÉLECTION DES ÉLÉMENTS DU DOM ===
+// Sélectionne les éléments HTML pour l'affichage dynamique
+const produitsGrid = document.getElementById("produits-grid"); // Grille des produits
+const panierContenu = document.getElementById("panier-contenu"); // Contenu du panier
+const totalPrixElement = document.getElementById("total-prix"); // Total du panier
+const cartCount = document.getElementById("cart-count"); // Compteur panier
+
+// Récupère le panier depuis le localStorage ou initialise vide
 let panier = JSON.parse(localStorage.getItem("panier")) || [];
 
-// Afficher les produits (optionnellement filtrés et triés)
+
+// === AFFICHAGE DES PRODUITS ===
+// Affiche la liste des produits (filtrés/triés si besoin)
 function afficherProduits(liste = produits) {
   if (!produitsGrid) return;
   // Appliquer le tri si le select existe
@@ -115,29 +83,31 @@ function afficherProduits(liste = produits) {
   });
   initialiserBoutonsAjout();
   initialiserEtoiles();
-// Gestion des étoiles de notation
-function initialiserEtoiles() {
-  document.querySelectorAll('.etoiles').forEach(div => {
-    const nomProduit = div.getAttribute('data-nom');
-    div.querySelectorAll('.etoile').forEach(etoile => {
-      etoile.addEventListener('click', function() {
-        const value = parseInt(this.getAttribute('data-value'));
-        // Sauvegarder la note en localStorage
-        const notes = JSON.parse(localStorage.getItem("notesProduits") || "{}" );
-        notes[nomProduit] = value;
-        localStorage.setItem("notesProduits", JSON.stringify(notes));
-        // Mettre à jour l'affichage
-        div.querySelectorAll('.etoile').forEach((e, idx) => {
-          if (idx < value) e.classList.add('active');
-          else e.classList.remove('active');
+  // Gestion des étoiles de notation pour chaque produit
+  function initialiserEtoiles() {
+    document.querySelectorAll('.etoiles').forEach(div => {
+      const nomProduit = div.getAttribute('data-nom');
+      div.querySelectorAll('.etoile').forEach(etoile => {
+        etoile.addEventListener('click', function() {
+          const value = parseInt(this.getAttribute('data-value'));
+          // Sauvegarder la note en localStorage
+          const notes = JSON.parse(localStorage.getItem("notesProduits") || "{}" );
+          notes[nomProduit] = value;
+          localStorage.setItem("notesProduits", JSON.stringify(notes));
+          // Mettre à jour l'affichage des étoiles
+          div.querySelectorAll('.etoile').forEach((e, idx) => {
+            if (idx < value) e.classList.add('active');
+            else e.classList.remove('active');
+          });
         });
       });
     });
-  });
-}
+  }
 }
 
-// Ajouter un produit
+
+// === AJOUTER UN PRODUIT AU PANIER ===
+// Ajoute un produit au panier ou augmente la quantité si déjà présent
 function ajouterAuPanier(produit) {
   const index = panier.findIndex(p => p.nom === produit.nom);
   if (index !== -1) {
@@ -149,7 +119,9 @@ function ajouterAuPanier(produit) {
   majPanier();
 }
 
-// Mettre à jour le panier
+
+// === METTRE À JOUR L'AFFICHAGE DU PANIER ===
+// Affiche les produits du panier et le total
 function majPanier() {
   panierContenu.innerHTML = "";
   let total = 0;
@@ -177,7 +149,8 @@ function majPanier() {
   mettreAJourCompteur();
 }
 
-// Changer quantité
+
+// === CHANGER LA QUANTITÉ D'UN PRODUIT DANS LE PANIER ===
 function changerQuantite(index, delta) {
   panier[index].quantite += delta;
   if (panier[index].quantite <= 0) {
@@ -187,21 +160,26 @@ function changerQuantite(index, delta) {
   majPanier();
 }
 
-// Supprimer un produit
+
+// === SUPPRIMER UN PRODUIT DU PANIER ===
 function supprimerProduit(index) {
   panier.splice(index, 1);
   localStorage.setItem("panier", JSON.stringify(panier));
   majPanier();
 }
 
-// Compteur sur l'icône panier
+
+// === METTRE À JOUR LE COMPTEUR DU PANIER ===
+// Affiche le nombre total d'articles dans le badge panier
 function mettreAJourCompteur() {
   const total = panier.reduce((acc, item) => acc + item.quantite, 0);
   cartCount.textContent = total;
   cartCount.style.display = total > 0 ? "inline-block" : "none";
 }
 
-// Écouteurs sur boutons "Ajouter au panier"
+
+// === ÉCOUTEURS SUR LES BOUTONS "AJOUTER AU PANIER" ===
+// Ajoute les produits au panier lors du clic sur les boutons
 function initialiserBoutonsAjout() {
   const boutons = document.querySelectorAll(".add-to-cart");
   boutons.forEach(bouton => {
@@ -238,7 +216,9 @@ function initialiserBoutonsAjout() {
 
 
 
-// Gestion du tri des produits
+
+// === TRI DES PRODUITS ===
+// Trie les produits selon le choix de l'utilisateur
 const triSelect = document.getElementById('tri-select');
 if (triSelect) {
   triSelect.addEventListener('change', () => {
@@ -246,11 +226,15 @@ if (triSelect) {
   });
 }
 
-// Initialisation
+
+// === INITIALISATION AU CHARGEMENT ===
+// Affiche les produits et le panier au chargement de la page
 afficherProduits();
 majPanier();
 
-// Recherche de produits
+
+// === RECHERCHE DE PRODUITS ===
+// Filtre les produits selon le texte saisi dans la barre de recherche
 const searchInput = document.querySelector('.search-bar input');
 const searchBtn = document.querySelector('.search-bar button');
 if (searchInput) {
@@ -276,7 +260,9 @@ if (searchInput) {
   }
 }
 
-// Gestion du clic sur les catégories (HTML statique)
+
+// === GESTION DU CLIC SUR LES CATÉGORIES ===
+// Lorsqu'on clique sur une carte catégorie, filtre les produits de cette catégorie
 document.querySelectorAll('.categorie-card').forEach(card => {
   card.addEventListener('click', function() {
     const nomCategorie = this.querySelector('h3').textContent.trim();
@@ -287,6 +273,9 @@ document.querySelectorAll('.categorie-card').forEach(card => {
 });
 
 
+
+// === FILTRER PAR CATÉGORIE (optionnel) ===
+// Permet de filtrer les produits selon une catégorie précise
 function filtrerParCategorie(nomCategorie) {
   const produitsFiltres = produits.filter(p => {
     return (
@@ -296,13 +285,16 @@ function filtrerParCategorie(nomCategorie) {
       (nomCategorie === "Chaussures" && p.nom.includes("Chaussures"))
     );
   });
-
   afficherProduits(produitsFiltres);
 }
 
-const vues = document.querySelectorAll(".view");
-const liens = document.querySelectorAll("[data-view]");
 
+// === NAVIGATION ENTRE LES VUES ===
+// Gère l'affichage des sections principales (accueil, catégories, produits, panier)
+const vues = document.querySelectorAll(".view"); // Toutes les sections principales
+const liens = document.querySelectorAll("[data-view]"); // Tous les liens de navigation
+
+// Ajoute un écouteur sur chaque bouton du menu
 liens.forEach(lien => {
   lien.addEventListener("click", e => {
     e.preventDefault();
@@ -320,6 +312,7 @@ liens.forEach(lien => {
   });
 });
 
+// Affiche la section demandée et masque les autres
 function afficherVue(nomVue) {
   vues.forEach(v => v.classList.remove("active"));
   const vueActive = document.getElementById(nomVue);

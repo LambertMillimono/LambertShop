@@ -7,82 +7,11 @@
   flex-wrap: wrap;
   width: 100%;
   box-sizing: border-box;
-}
-.main-nav {
-  background: transparent !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-  position: static !important;
-}
-.main-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  padding: 0;
-  margin: 0;
-  flex-wrap: wrap;
-}
-.search-bar {
-  margin-left: 9vw !important; /* Utilise une marge relative à la largeur */
-  margin-right: 0 !important;
-  min-width: 180px;
-  width: 100%;
-  max-width: 320px;
-  flex: 1 1 180px;
-}
 
-/* Badge promo pour produits en promo sur l'accueil uniquement */
-.product-grid.accueil .product-card::before {
-  content: 'PROMO';
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: linear-gradient(90deg, #ff4d00 60%, #ffb380 100%);
-  color: #fff;
-  font-family: 'Poppins', 'Arial', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-  padding: 5px 18px 5px 12px;
-  border-radius: 18px 6px 18px 0;
-  box-shadow: 0 2px 8px rgba(255,77,0,0.18);
-  letter-spacing: 1.2px;
-  z-index: 2;
-  text-shadow: 0 1px 6px #ff4d00cc;
-  border: 2px solid #fff;
-  animation: promoPop 0.7s cubic-bezier(.4,0,.2,1);
-}
-
-.product-grid {
-  position: relative;
-}
-.product-grid .product-card {
-  position: relative;
-  overflow: visible;
-}
-
-@media (max-width: 600px) {
-  .product-grid.accueil .product-card::before {
-    font-size: 0.85rem;
-    top: 8px;
-    left: 8px;
-    padding: 3px 10px 3px 8px;
-    border-radius: 12px 4px 12px 0;
-  }
-}
-
-@keyframes promoPop {
-  from { transform: scale(0.7) rotate(-8deg); opacity: 0; }
-  to { transform: scale(1) rotate(0); opacity: 1; }
-}
-/* Alignement vertical des icônes Contactez-nous */
-.contact-vertical {
-  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 18px;
-  margin-top: 8px;
+  margin-top: 0px;
 }
 .contact-item {
   display: flex;
@@ -104,7 +33,16 @@
   color: #ff4d00;
   word-break: break-all;
 }
+/*
+=========================
+HEADER & CONTACT
+=========================
+.header : En-tête principal du site, contient le logo, la navigation et la barre de recherche.
+.contact-item : Bloc pour chaque info de contact (icône, texte).
+*/
 /* ================= RESPONSIVE GLOBAL ================= */
+/* ================= RESPONSIVE GLOBAL =================
+Media queries pour l'adaptation mobile/tablette/desktop */
 @media (max-width: 1100px) {
   .main-nav ul {
     gap: 18px;
@@ -210,6 +148,8 @@
   }
 }
 /* Footer columns harmonisation */
+/* ================= FOOTER =================
+.footer-col : Colonnes du footer (contact, newsletter, liens, etc.) */
 .footer-col {
   flex: 1 1 220px;
   min-width: 180px;
@@ -229,6 +169,7 @@
   text-align: center;
 }
 /* Newsletter footer */
+/* Newsletter footer : section d'inscription à la newsletter dans le footer */
 .newsletter-section {
   max-width: 340px;
   margin-left: 64px;
@@ -268,6 +209,7 @@
   font-size: 15px;
 }
 /* Notation étoiles produits */
+/* Notation étoiles produits : styles pour l'affichage des étoiles de notation sur les produits */
 .etoiles {
   display: flex;
   justify-content: center;
@@ -290,6 +232,7 @@
 /* Slider accueil */
 
 /* Font & base */
+/* Font & base : styles de base pour la structure principale */
 .view {
   display: none;
   padding: 30px;
@@ -314,6 +257,7 @@ a {
 }
 
 /* En-tête */
+/* En-tête : styles principaux pour l'en-tête du site */
 .header {
   background-color: #ff4d00;
   color: white;
@@ -451,6 +395,7 @@ a {
 
 
 /* Catégories */
+/* Catégories : styles pour la section des catégories de produits */
 .categories {
   display: flex;
   justify-content: center;
@@ -474,6 +419,7 @@ a {
 }
 
 /* Grille de produits */
+/* Grille de produits : disposition des cartes produits */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -482,6 +428,7 @@ a {
 }
 
 /* Carte produit */
+/* Carte produit : styles pour chaque carte de produit */
 .product-card {
   background-color: white;
   border-radius: 10px;
@@ -530,6 +477,7 @@ a {
 }
 
 /* Responsive */
+/* Responsive : ajustements pour petits écrans */
 @media (max-width: 600px) {
   .search-bar {
     display: none;
@@ -546,6 +494,7 @@ a {
 }
 
 /* Volet panier */
+/* Volet panier : styles pour le panneau latéral du panier */
 .cart-sidebar {
   position: fixed;
   top: 0;
@@ -605,6 +554,7 @@ a {
 
 
 /* Footer */
+/* Footer : styles principaux du pied de page */
 .footer {
   background: black;
   color: #fff;
@@ -630,6 +580,7 @@ a {
   padding-bottom: 28px;
 }
 /* Style spécial pour LambertShops dans le footer */
+/* Style spécial pour LambertShops dans le footer */
 .footer .lambert-logo {
   font-family: 'Pacifico', cursive, 'Comic Sans MS', fantasy, sans-serif;
   font-size: 2.6em;
@@ -641,6 +592,7 @@ a {
   display: inline-block;
 }
 
+/* Responsive footer : adaptation du footer sur mobile/tablette */
 @media (max-width: 1100px) {
   .footer-container {
     gap: 32px;
@@ -890,6 +842,7 @@ a {
  }
 
 /*product details */
+/* Product details : titres et conteneurs de la page produits */
 .section-title {
   text-align: center;
   font-size: 2rem;
@@ -1020,6 +973,7 @@ a {
 }
 
 /* === Panier === */
+/* === Panier === : styles pour la page et les éléments du panier */
 #panier {
   padding: 2rem;
   background-color: #fefefe;
@@ -1076,6 +1030,7 @@ a {
 }
 
 /* === Compteur du panier === */
+/* === Compteur du panier === : badge du nombre d'articles dans le panier */
 .cart-count {
   background: red;
   color: white;
@@ -1088,6 +1043,7 @@ a {
 }
 
 /* === Produit (dans la grille) === */
+/* === Produit (dans la grille) === : styles pour chaque produit dans la grille */
 .produit {
   background: #fff;
   border-radius: 8px;
@@ -1119,6 +1075,7 @@ a {
   background-color: black;
 }
  /*CATEGORIE*/
+/* CATEGORIE : styles pour la grille et les cartes de catégories */
  .categories-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
