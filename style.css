@@ -40,7 +40,6 @@ HEADER & CONTACT
 .header : En-tête principal du site, contient le logo, la navigation et la barre de recherche.
 .contact-item : Bloc pour chaque info de contact (icône, texte).
 */
-/* ================= RESPONSIVE GLOBAL ================= */
 /* ================= RESPONSIVE GLOBAL =================
 Media queries pour l'adaptation mobile/tablette/desktop */
 @media (max-width: 1100px) {
@@ -242,7 +241,6 @@ Media queries pour l'adaptation mobile/tablette/desktop */
   display: block;
 }
 
-
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -287,7 +285,6 @@ a {
 .logo:hover {
   color: #ff4d00;
 }
-
 
 .search-bar {
   display: flex;
@@ -379,7 +376,6 @@ a {
   font-size: 16px;
 }
 
-
 .main-nav a:hover {
   background-color: black;
   color: white;
@@ -392,7 +388,6 @@ a {
   font-weight: bold;
   box-shadow: 0 2px 6px rgba(255, 77, 0, 0.7);
 }
-
 
 /* Catégories */
 /* Catégories : styles pour la section des catégories de produits */
@@ -551,8 +546,6 @@ a {
   font-weight: bold;
 }
 
-
-
 /* Footer */
 /* Footer : styles principaux du pied de page */
 .footer {
@@ -698,12 +691,6 @@ a {
   text-shadow: 0 2px 8px #ff4d00;
 }
 
-
-
-
-
-
-
 .social-icons {
   display: flex;
   flex-direction: row;
@@ -725,7 +712,6 @@ a {
   transform: scale(1.18) rotate(-8deg);
 }
 
-
 .footer-bottom {
   text-align: center;
   font-size: 15px;
@@ -734,7 +720,6 @@ a {
   letter-spacing: 0.07em;
   opacity: 0.85;
 }
-
 
 /* Contact minimal dans footer */
 .contact-footer {
@@ -883,7 +868,6 @@ a {
   transform: translateY(-5px);
 }
 
-
 .produit-img-bg {
   position: relative;
   width: 100%;
@@ -923,6 +907,7 @@ a {
   color: #fff;
   text-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
+
 .produit-img-content p {
   margin: 0;
   font-size: 1.08rem;
