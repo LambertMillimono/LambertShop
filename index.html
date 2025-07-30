@@ -42,7 +42,7 @@
     <div class="banniere-bienvenue-custom">
       <div style="text-align:center; width:100%;">
         <h1 class="banniere-titre-stylise">Bienvenue sur LambertShop !</h1>
-        <p>Découvrez nos offres exceptionnelles et profitez de la qualité au meilleur prix.</p>
+        <p class="banniere-accroche-stylise">Offrez-vous le meilleur dès aujourd'hui&nbsp;: profitez de nos promos exclusives, faites-vous plaisir et laissez-vous surprendre par la qualité à prix imbattable&nbsp;! Saisissez l'opportunité, les stocks sont limités&nbsp;!</p>
       </div>
     </div>
     <div style="text-align:center;width:100%;">
@@ -64,6 +64,29 @@
       ">🔥 PROMOTIONS DU MOMENT 🔥</h2>
     </div>
     <style>
+      .header {
+      .main-nav ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 18px;
+        margin: 0;
+        padding: 0 0 0 24px;
+      }
+      .main-nav ul li {
+        list-style: none;
+      }
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        z-index: 1000;
+        /* background supprimé pour laisser la couleur d'origine */
+        box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      }
+      main {
+        margin-top: 90px;
+      }
       .banniere-bienvenue-custom {
         width: 100vw;
         max-width: none;
@@ -134,6 +157,29 @@
         box-shadow: 0 2px 10px rgba(255,77,0,0.04);
         animation: fadeInText 1.1s cubic-bezier(.4,0,.2,1);
       }
+      .banniere-accroche-stylise {
+        font-family: 'Pacifico', 'Poppins', 'Segoe UI', 'Arial', cursive;
+        font-style: italic;
+        font-size: 1.32rem;
+        color: #ff4d00;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        background: none;
+        border-radius: 0;
+        padding: 0;
+        margin-top: 16px;
+        display: inline-block;
+        box-shadow: none;
+        animation: none;
+        transition: none;
+        border: none;
+      }
+      @media (max-width: 700px) {
+        .banniere-accroche-stylise {
+          font-size: 1.08rem;
+          padding: 0;
+        }
+      }
       @keyframes banniereFadeIn {
         from { opacity: 0; transform: scale(0.98); }
         to { opacity: 1; transform: scale(1); }
@@ -169,31 +215,31 @@
     </style>
     <div class="product-grid accueil">
       <div class="product-card">
-        <img src="images/Tablette.jpg" alt="Smartphone Android 4G">
-        <h3>Smartphone Android 4G</h3>
-        <div class="price">1 200 000 GNF</div>
+        <img src="images/PROMO/iPhone 15 pro on box.jpg" alt="iPhone 15 pro">
+        <h3>iPhone 15 pro</h3>
+        <div class="price">4 200 000 GNF</div>
         <button class="add-btn">Ajouter au panier</button>
       </div>
       <div class="product-card">
-        <img src="images/produits/promo2.jpg" alt="Montre connectée">
-        <h3>Montre connectée</h3>
-        <div class="price">650 000 GNF</div>
+        <img src="images/PROMO/homme_pro.jpg" alt="Costume">
+        <h3>Costume</h3>
+        <div class="price">5 000 000 GNF</div>
         <button class="add-btn">Ajouter au panier</button>
       </div>
       <div class="product-card">
-        <img src="images/produits/promo3.jpg" alt="Écouteurs Bluetooth">
-        <h3>Écouteurs Bluetooth</h3>
-        <div class="price">180 000 GNF</div>
+        <img src="images/PROMO/femme_pro.jpg" alt="Robe">
+        <h3>Robe Elégante</h3>
+        <div class="price">2 300 000 GNF</div>
         <button class="add-btn">Ajouter au panier</button>
       </div>
       <div class="product-card">
-        <img src="images/produits/promo4.jpg" alt="Sac à dos tendance">
-        <h3>Sac à dos tendance</h3>
-        <div class="price">250 000 GNF</div>
+        <img src="images/PROMO/Bijoux.jpg" alt="Rolex">
+        <h3>Rolex en diamant</h3>
+        <div class="price">3 500 000 GNF</div>
         <button class="add-btn">Ajouter au panier</button>
       </div>
       <div class="product-card">
-        <img src="images/produits/promo5.jpg" alt="Parfum de luxe">
+        <img src="images/PROMO/parfum_pro.jpg" alt="Parfum de luxe">
         <h3>Parfum de luxe</h3>
         <div class="price">400 000 GNF</div>
         <button class="add-btn">Ajouter au panier</button>

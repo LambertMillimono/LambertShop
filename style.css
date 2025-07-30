@@ -1,3 +1,29 @@
+/* --- Correction alignement menu principal à gauche --- */
+.header {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+.main-nav {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  position: static !important;
+}
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 0 0 0 0;
+  margin: 0;
+}
+.search-bar {
+  margin-left: 110px !important; /* Augmente l'espace entre le menu et la barre de recherche */
+  margin-right: 0 !important;
+}
 
 /* Badge promo pour produits en promo sur l'accueil uniquement */
 .product-grid.accueil .product-card::before {

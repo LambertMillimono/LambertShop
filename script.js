@@ -125,7 +125,7 @@ function afficherProduits(liste = produits) {
     }
   }
   produitsGrid.innerHTML = "";
-  produitsAffiches.forEach((produit, index) => {
+  produitsAffiches.forEach((produit) => {
     // Récupérer la note stockée pour ce produit
     const notes = JSON.parse(localStorage.getItem("notesProduits") || "{}" );
     const note = notes[produit.nom] || 0;
@@ -144,7 +144,7 @@ function afficherProduits(liste = produits) {
           </div>
         </div>
         ${etoiles}
-        <button class="add-to-cart" data-index="${index}">Ajouter au panier</button>
+        <button class="add-to-cart" data-nom="${produit.nom.replace(/"/g, '&quot;')}">Ajouter au panier</button>
       </div>
     `;
   });
@@ -241,9 +241,32 @@ function initialiserBoutonsAjout() {
   const boutons = document.querySelectorAll(".add-to-cart");
   boutons.forEach(bouton => {
     bouton.addEventListener("click", () => {
-      const index = parseInt(bouton.dataset.index);
-      const produit = produits[index];
-      ajouterAuPanier(produit);
+      const nom = bouton.dataset.nom;
+      const produit = produits.find(p => p.nom === nom);
+      if (produit) {
+        ajouterAuPanier(produit);
+      }
+    });
+  });
+  // Gestion des boutons statiques sur la page d'accueil (promos)
+  document.querySelectorAll('.product-grid.accueil .add-btn').forEach((btn, idx) => {
+    btn.addEventListener('click', function() {
+      // Récupérer le nom du produit affiché dans la carte
+      const card = btn.closest('.product-card');
+      const nom = card.querySelector('h3').textContent.trim();
+      // Chercher le produit correspondant dans la liste produits (par nom)
+      const produit = produits.find(p => p.nom === nom);
+      if (produit) {
+        ajouterAuPanier(produit);
+      } else {
+        // Si non trouvé, créer un produit temporaire à partir du HTML
+        ajouterAuPanier({
+          nom: nom,
+          prix: parseInt(card.querySelector('.price').textContent.replace(/[^\d]/g, '')),
+          image: card.querySelector('img').getAttribute('src'),
+          quantite: 1
+        });
+      }
     });
   });
 }
